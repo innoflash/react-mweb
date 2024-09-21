@@ -35,7 +35,7 @@ export default function DealsFilter() {
 
   return (
     <div className="w-full flex flex-col md:flex-row">
-      <div className="w-full md:w-1/3">
+      <div className="w-full md:w-1/2 lg:w-1/3">
         <label className="font-light">Filter By:</label>
         <div className="flex gap-2">
           <select value={ undefined }
@@ -51,7 +51,7 @@ export default function DealsFilter() {
           </select>
         </div>
       </div>
-      <div className="w-full mt-4 md:mt-0 md:w-1/3 flex flex-col">
+      <div className="w-full mt-4 md:mt-0 md:w-1/2 lg:w-1/3 flex flex-col">
         <label className="font-light">Deal Type:</label>
         <select value={ selectedCampaign?.code }
                 className="bg-blue-900 text-white py-2 text-center"
