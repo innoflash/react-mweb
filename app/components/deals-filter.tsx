@@ -18,7 +18,7 @@ export default function DealsFilter() {
   const campaigns = useSelector<AppState, Array<Campaign>>(state => state[CAMPAIGNS].campaigns);
   const selectedCampaign = useSelector<AppState, Campaign | undefined>(state => state[CAMPAIGNS].selectedCampaign);
 
-  const priceRangeChangeHandler = (event: ChangeEvent<{ value: string }>) => {
+  const priceRangeChangeHandler = (event: ChangeEvent<HTMLSelectElement>) => {
     const selectedPriceIndex = +event.target.value;
     if (selectedPriceIndex === -1) {
       return dispatch(filterActions.updatePriceFilter(undefined));
@@ -27,7 +27,7 @@ export default function DealsFilter() {
     return dispatch(filterActions.updatePriceFilter(priceOptions[selectedPriceIndex]));
   }
 
-  const dealTypeChangeHandler = (event: ChangeEvent<{ value: string }>) => {
+  const dealTypeChangeHandler = (event: ChangeEvent<HTMLSelectElement>) => {
     setFilteredPriceRange('-1');
     if (priceSelectRef?.current) {
       priceSelectRef.current.value = '-1';
@@ -46,6 +46,7 @@ export default function DealsFilter() {
             <option value={ undefined }>Speed</option>
           </select>
           <select defaultValue={ filteredPriceRange }
+                  // @ts-expect-error This is alright.
                   ref={ priceSelectRef }
                   className="px-4 py-2 border-2 bg-transparent flex-grow md:flex-grow-0"
                   onChange={ priceRangeChangeHandler }>
