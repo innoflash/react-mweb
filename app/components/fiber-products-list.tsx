@@ -3,10 +3,20 @@
 import Loader from '@mweb/app/components/loader';
 import useHttp from '@mweb/app/hooks/useHttp';
 import { FiberCampaignsResponse } from '@mweb/app/models/fiber-campaigns.response';
+import { FibrePromotionModel } from '@mweb/app/models/fibre-product.model';
 import { useEffect } from 'react';
 
 export default function FiberProductsList() {
-  const { launchRequest: getFibreProductsRequest, isLoading: isFetchingFibreProducts } = useHttp();
+  const {
+    launchRequest: getFibreProductsRequest,
+    isLoading: isFetchingFibreProducts
+  } = useHttp<Array<FibrePromotionModel>>({
+    onRequestSuccess: (response) => {
+      //TODO: save promos in state manager.
+      console.log(response);
+    }
+  });
+
   const {
     launchRequest: getFibreCampaignsRequest,
     isLoading: isFetchingFibreCampaigns
@@ -37,9 +47,10 @@ export default function FiberProductsList() {
   return (
     <>
       <h1 className="font-bold text-center text-3xl">Fiber Products</h1>
-      <p className="text-center my-2">Select a Fibre infrastructure provider below, browse the products available and
-        complete a coverage search</p>
-      { isFetchingFibreCampaigns && <Loader/> }
+      <p className="text-center my-2">
+        Select a Fibre infrastructure provider below, browse the products available and complete a coverage search
+      </p>
+      { (isFetchingFibreCampaigns || isFetchingFibreProducts) && <Loader/> }
     </>
   );
 }
