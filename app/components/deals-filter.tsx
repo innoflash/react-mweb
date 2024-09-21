@@ -1,15 +1,16 @@
 import { Campaign } from '@mweb/app/models/fiber-campaigns.response';
 import { AppState } from '@mweb/app/models/state/app.state.model';
-import { CAMPAIGNS } from '@mweb/app/store/campaigns.slice';
-import App from 'next/app';
-import { useSelector } from 'react-redux';
+import { campaignActions, CAMPAIGNS } from '@mweb/app/store/campaigns.slice';
+import { useDispatch, useSelector } from 'react-redux';
+
+const priceOptions = [
+  'R0 - R699',
+  'R700 - R999',
+  'R1000+'
+];
 
 export default function DealsFilter() {
-  const priceOptions = [
-    'R0 - R699',
-    'R700 - R999',
-    'R1000+'
-  ];
+  const dispatch = useDispatch();
   const campaigns = useSelector<AppState, Array<Campaign>>(state => state[CAMPAIGNS].campaigns);
   const selectedCampaign = useSelector<AppState, Campaign | undefined>(state => state[CAMPAIGNS].selectedCampaign);
 
@@ -34,7 +35,8 @@ export default function DealsFilter() {
         <label className="font-light">Deal Type:</label>
         <select value={ selectedCampaign?.code }
                 className="bg-blue-900 text-white py-2 text-center"
-                style={ { borderRight: "10px solid transparent" } }>
+                style={ { borderRight: "10px solid transparent" } }
+                onChange={ e => dispatch(campaignActions.setSelectedCampaign(e.target.value)) }>
           <option disabled value={ undefined }>Select campaign</option>
           { campaigns.map(campaign => (
             <option key={ campaign.code } value={ campaign.code }>{ campaign.name }</option>)) }

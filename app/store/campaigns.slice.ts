@@ -15,8 +15,11 @@ const campaignsSlice = createSlice({
     },
     setSelectedCampaign: (state, action: { payload: Campaign | string | undefined }) => {
       if (typeof action.payload === 'string') {
-        action.payload = state.campaigns.find(campaign => campaign.code === action.payload);
+        state.selectedCampaign = state.campaigns.find(campaign => campaign.code === action.payload);
+
+        return;
       }
+
       state.selectedCampaign = action.payload;
     }
   }
