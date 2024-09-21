@@ -13,7 +13,7 @@ const campaignsSlice = createSlice({
     setCampaigns: (state, action: { payload: Array<Campaign> }) => {
       state.campaigns = action.payload;
     },
-    setSelectedCampaign: (state, action: { payload: Campaign }) => {
+    setSelectedCampaign: (state, action: { payload: Campaign | undefined }) => {
       state.selectedCampaign = action.payload;
     }
   }

@@ -27,7 +27,10 @@ export default function FiberProductsList() {
     onRequestSuccess: (response: FiberCampaignsResponse) => {
       //Save campaigns in state manager.
       dispatch(campaignActions.setCampaigns(response.campaigns));
-      //TODO: Save default selected campaign code.
+
+      //Save default selected campaign code.
+      const selectedCampaign = response.campaigns.find(campaign => campaign.isDefaultCampaign);
+      dispatch(campaignActions.setSelectedCampaign(selectedCampaign));
 
       const productsUrls = response.campaigns.map(campaign => {
         const queryParams = new URLSearchParams({ sellable_online: 'true' });
