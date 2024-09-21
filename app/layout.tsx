@@ -1,7 +1,6 @@
 'use client'
 
 import store from '@mweb/app/store';
-import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { Provider } from 'react-redux';

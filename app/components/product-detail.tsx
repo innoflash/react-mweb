@@ -19,6 +19,7 @@ export default function ProductDetail({ product, campaign }: { product: FibrePro
           <img className="h-full" src={ providerLogo } alt={ product.subcategory }/>
         </div>
       </div>
+
     </div>
   )
 }
