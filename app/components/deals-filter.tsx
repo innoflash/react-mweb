@@ -26,6 +26,11 @@ export default function DealsFilter() {
     return dispatch(filterActions.updatePriceFilter(priceOptions[+selectedPriceIndex]));
   }
 
+  const dealTypeChangeHandler = (event: ChangeEvent<{ value: string }>) => {
+    setFilteredPriceRange(undefined);
+    dispatch(campaignActions.setSelectedCampaign(event.target.value));
+  }
+
   return (
     <div className="w-full flex flex-row">
       <div className="w-1/3">
@@ -49,7 +54,7 @@ export default function DealsFilter() {
         <select value={ selectedCampaign?.code }
                 className="bg-blue-900 text-white py-2 text-center"
                 style={ { borderRight: "10px solid transparent" } }
-                onChange={ e => dispatch(campaignActions.setSelectedCampaign(e.target.value)) }>
+                onChange={ dealTypeChangeHandler }>
           <option disabled value={ undefined }>Select campaign</option>
           { campaigns.map(campaign => (
             <option key={ campaign.code } value={ campaign.code }>{ campaign.name }</option>)) }
