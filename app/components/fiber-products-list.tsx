@@ -5,6 +5,7 @@ import useHttp from '@mweb/app/hooks/useHttp';
 import { FiberCampaignsResponse } from '@mweb/app/models/fiber-campaigns.response';
 import { FibrePromotionModel } from '@mweb/app/models/fibre-product.model';
 import { campaignActions } from '@mweb/app/store/campaigns.slice';
+import { promotionActions } from '@mweb/app/store/promotions.slice';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -15,8 +16,8 @@ export default function FiberProductsList() {
     isLoading: isFetchingFibreProducts
   } = useHttp<Array<Array<FibrePromotionModel>>>({
     onRequestSuccess: (response) => {
-      //TODO: save promos in state manager.
-      console.log(response.flat());
+      //save promos in state manager.
+      dispatch(promotionActions.setPromotions(response.flat()));
     }
   });
 
@@ -32,6 +33,7 @@ export default function FiberProductsList() {
       const selectedCampaign = response.campaigns.find(campaign => campaign.isDefaultCampaign);
       dispatch(campaignActions.setSelectedCampaign(selectedCampaign));
 
+      //Fetch promotions based off of the found campaigns.
       const productsUrls = response.campaigns.map(campaign => {
         const queryParams = new URLSearchParams({ sellable_online: 'true' });
 
