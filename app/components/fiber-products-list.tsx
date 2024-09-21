@@ -2,12 +2,15 @@
 
 import Loader from '@mweb/app/components/loader';
 import useHttp from '@mweb/app/hooks/useHttp';
-import { FiberProductsResponse } from '@mweb/app/models/fiber-products.response';
+import { FiberCampaignsResponse } from '@mweb/app/models/fiber-campaigns.response';
 import { useEffect } from 'react';
 
 export default function FiberProductsList() {
-  const { launchRequest: getFibreProductsRequest, isLoading: isFetchingFibreProducts } = useHttp<FiberProductsResponse>({
-    onRequestSuccess: (response: FiberProductsResponse) => {
+  //const { data: fibreProducts, isLoading: isFetchingFibreProducts } = useHttp<FiberCampaignsResponse>();
+  const { launchRequest: getFibreCampaignsRequest, isLoading: isFetchingFibreCampaigns } = useHttp<FiberCampaignsResponse>({
+    onRequestSuccess: (response: FiberCampaignsResponse) => {
+      //TODO: Save campaigns in state manager.
+      //TODO: Save default selected campaign code.
       console.log(response);
     }
   });
@@ -18,7 +21,7 @@ export default function FiberProductsList() {
       visibility: 'public'
     });
 
-    return getFibreProductsRequest(`/campaigns/fibre?${ queryParams.toString() }`);
+    return getFibreCampaignsRequest(`/campaigns/fibre?${ queryParams.toString() }`);
   }, []);
 
   return (
@@ -26,7 +29,7 @@ export default function FiberProductsList() {
       <h1 className="font-bold text-center text-3xl">Fiber Products</h1>
       <p className="text-center my-2">Select a Fibre infrastructure provider below, browse the products available and
         complete a coverage search</p>
-      { isFetchingFibreProducts && <Loader/> }
+      { isFetchingFibreCampaigns && <Loader/> }
     </>
   );
 }

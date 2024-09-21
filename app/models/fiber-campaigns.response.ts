@@ -1,4 +1,4 @@
-export interface FiberProductsResponse {
+export interface FiberCampaignsResponse {
   links: Array<unknown>;
   campaigns: Array<Campaign>;
 }
