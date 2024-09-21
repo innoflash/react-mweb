@@ -8,12 +8,12 @@ import { useEffect } from 'react';
 
 export default function FiberProductsList() {
   const {
-    launchRequest: getFibreProductsRequest,
+    launchRequest: getFibrePromotionsRequest,
     isLoading: isFetchingFibreProducts
-  } = useHttp<Array<FibrePromotionModel>>({
+  } = useHttp<Array<Array<FibrePromotionModel>>>({
     onRequestSuccess: (response) => {
       //TODO: save promos in state manager.
-      console.log(response);
+      console.log(response.flat());
     }
   });
 
@@ -31,7 +31,7 @@ export default function FiberProductsList() {
         return `/products/promos/${ campaign.promocodes.join(',') }?${ queryParams.toString() }`;
       });
 
-      return getFibreProductsRequest(productsUrls);
+      return getFibrePromotionsRequest(productsUrls);
     }
   });
 
