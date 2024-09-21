@@ -71,6 +71,9 @@ export default function FiberProductsList(props: { onLoadingCompleted: VoidFunct
         Select a Fibre infrastructure provider below, browse the products available and complete a coverage search
       </p>
       { (isFetchingFibreCampaigns || isFetchingFibreProducts) && <Loader/> }
+      { (!isFetchingFibreCampaigns || !isFetchingFibreProducts) && <div>
+          This is gonna be listed.
+      </div> }
     </>
   );
 }
