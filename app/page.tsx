@@ -1,4 +1,4 @@
-import FiberProductsList from '@mweb/app/src/components/fiber-products-list';
+import FiberProductsList from '@mweb/app/components/fiber-products-list';
 
 export default function Home() {
   return (

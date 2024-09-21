@@ -1,4 +1,4 @@
-import Loader from '@mweb/app/src/components/loader';
+import Loader from '@mweb/app/components/loader';
 
 export default function FiberProductsList() {
   return (
