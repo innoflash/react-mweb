@@ -7,7 +7,7 @@ import { FiberCampaignsResponse } from '@mweb/app/models/fiber-campaigns.respons
 import { FibrePromotionModel } from '@mweb/app/models/fibre-product.model';
 import { AppState } from '@mweb/app/models/state/app.state.model';
 import { campaignActions } from '@mweb/app/store/campaigns.slice';
-import { FILTERS } from '@mweb/app/store/filters.slice';
+import { filterActions, FILTERS } from '@mweb/app/store/filters.slice';
 import { promotionActions } from '@mweb/app/store/promotions.slice';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -83,6 +83,7 @@ export default function FiberProductsList(props: { onLoadingCompleted: VoidFunct
           <img src={ provider.providerLogo }
                alt={ provider.providerName }
                key={ provider.providerName }
+               onClick={() => dispatch(filterActions.toggleProvider(provider.providerName))}
                className={ `py-4 px-12 bg-gray-300 w-full hover:bg-blue-900 rounded cursor-pointer ${ filteredProviders.includes(provider.providerName) ? 'bg-gray-400' : '' }` }/>
         )) }
       </div> }
