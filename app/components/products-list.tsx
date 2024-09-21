@@ -1,10 +1,12 @@
+import ProductDetail from '@mweb/app/components/product-detail';
 import { useSelectedProducts } from '@mweb/app/hooks/useSelectedProducts';
 
-export default function ProductsList(){
+export default function ProductsList() {
   const products = useSelectedProducts();
 
-  console.log(products[0]);
   return (
-    <div className="my-6">Products listed here.</div>
+    <div className="my-6 w-full grid grid-cols-2 gap-4">
+      { products.map(product => <ProductDetail key={ product.id } product={ product }/>) }
+    </div>
   );
 }
