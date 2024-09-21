@@ -1,4 +1,10 @@
 export default function DealsFilter() {
+  const priceOptions = [
+    'R0 - R699',
+    'R700 - R999',
+    'R1000+'
+  ];
+
   return (
     <div className="w-full flex flex-row">
       <div className="w-1/3">
@@ -11,6 +17,8 @@ export default function DealsFilter() {
           <select value={ undefined }
                   className="px-4 py-2 border-2">
             <option value={ undefined }>Price</option>
+            { priceOptions.map((priceOption) => <option key={ priceOption }
+                                                        value={ priceOption }>{ priceOption }</option>) }
           </select>
         </div>
       </div>
