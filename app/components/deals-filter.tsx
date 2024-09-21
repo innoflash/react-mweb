@@ -38,11 +38,11 @@ export default function DealsFilter() {
         <label className="font-light">Filter By:</label>
         <div className="flex gap-2">
           <select value={ undefined }
-                  className="px-4 py-2 border-2">
+                  className="px-4 py-2 border-2 bg-transparent">
             <option value={ undefined }>Speed</option>
           </select>
           <select value={ filteredPriceRange }
-                  className="px-4 py-2 border-2"
+                  className="px-4 py-2 border-2 bg-transparent"
                   onChange={ priceRangeChangeHandler }>
             <option value={ undefined }> Price</option>
             { priceOptions.map((priceOption, index) => <option key={ priceOption.label }
