@@ -19,7 +19,8 @@ export const filtersSlice = createSlice({
     },
     updatePriceFilter: (state, action: { payload: { min: number, max: number } | undefined }) => {
       state.price = action.payload;
-    }
+    },
+    resetFilter: () => initialState
   }
 });
 

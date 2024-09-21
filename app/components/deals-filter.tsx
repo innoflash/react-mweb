@@ -28,6 +28,7 @@ export default function DealsFilter() {
 
   const dealTypeChangeHandler = (event: ChangeEvent<{ value: string }>) => {
     setFilteredPriceRange(undefined);
+    dispatch(filterActions.resetFilter());
     dispatch(campaignActions.setSelectedCampaign(event.target.value));
   }
 
