@@ -78,7 +78,7 @@ export default function FiberProductsList(props: { onLoadingCompleted: VoidFunct
         Select a Fibre infrastructure provider below, browse the products available and complete a coverage search
       </p>
       { (isFetchingFibreCampaigns || isFetchingFibreProducts) && <Loader/> }
-      { (!isFetchingFibreCampaigns || !isFetchingFibreProducts) && <div className="grid md:grid-cols-3 lg:grid-cols-5 grid-cols-2 gap-4 mb-12 mt-8">
+      { (!isFetchingFibreCampaigns || !isFetchingFibreProducts) && <div className="grid md:grid-cols-3 lg:grid-cols-5 grid-cols-2 gap-4 mb-12 mt-8 max-h-96 overflow-y-scroll md:max-h-full md:overflow-y-auto">
         { selectedProviders.map(provider => (
           <img src={ provider.providerLogo }
                alt={ provider.providerName }
