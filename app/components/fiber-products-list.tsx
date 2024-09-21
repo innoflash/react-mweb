@@ -3,6 +3,7 @@
 import Loader from '@mweb/app/components/loader';
 import useHttp from '@mweb/app/hooks/useHttp';
 import { useSelectedPromotions } from '@mweb/app/hooks/useSelectedPromotions';
+import { useSelectedProviders } from '@mweb/app/hooks/useSelectedProviders';
 import { FiberCampaignsResponse } from '@mweb/app/models/fiber-campaigns.response';
 import { FibrePromotionModel } from '@mweb/app/models/fibre-product.model';
 import { campaignActions } from '@mweb/app/store/campaigns.slice';
@@ -12,6 +13,9 @@ import { useDispatch } from 'react-redux';
 
 export default function FiberProductsList(props: { onLoadingCompleted: VoidFunction }) {
   const dispatch = useDispatch();
+
+  const selectedProviders = useSelectedProviders();
+
   const promotions = useSelectedPromotions();
   const {
     launchRequest: getFibrePromotionsRequest,
@@ -66,8 +70,6 @@ export default function FiberProductsList(props: { onLoadingCompleted: VoidFunct
     return getFibreCampaignsRequest(`/campaigns/fibre?${ queryParams.toString() }`);
   }, []);
 
-  console.log({ promotions });
-
   return (
     <>
       <h1 className="font-bold text-center text-3xl">Fiber Products</h1>
@@ -75,8 +77,13 @@ export default function FiberProductsList(props: { onLoadingCompleted: VoidFunct
         Select a Fibre infrastructure provider below, browse the products available and complete a coverage search
       </p>
       { (isFetchingFibreCampaigns || isFetchingFibreProducts) && <Loader/> }
-      { (!isFetchingFibreCampaigns || !isFetchingFibreProducts) && <div>
-          This is gonna be listed.
+      { (!isFetchingFibreCampaigns || !isFetchingFibreProducts) && <div className="grid grid-cols-5 gap-4 mb-12 mt-8">
+        { selectedProviders.map(provider => (
+          <img src={ provider.providerLogo }
+               alt={ provider.providerName }
+               key={ provider.providerName }
+               className="py-4 px-12 bg-gray-300 w-full hover:bg-blue-900 rounded cursor-pointer"/>
+        )) }
       </div> }
     </>
   );
