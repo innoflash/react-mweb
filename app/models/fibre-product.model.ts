@@ -10,6 +10,7 @@ export interface FibrePromotionModel {
   promoUrlSlug: string;
   promoProductTagline: string;
   promoProductDescription: string;
+  providerLogo: string;
   products: FibreProductModel[];
 }
 

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+//TODO: Set the url into an environment variable.
 const baseAPIUrl = 'https://apigw.mweb.co.za/prod/baas/proxy/marketing';
 
 export interface HttpUseHookResult<T> {

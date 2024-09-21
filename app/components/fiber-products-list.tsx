@@ -17,7 +17,17 @@ export default function FiberProductsList() {
   } = useHttp<Array<Array<FibrePromotionModel>>>({
     onRequestSuccess: (response) => {
       //save promos in state manager.
-      dispatch(promotionActions.setPromotions(response.flat()));
+      dispatch(
+        promotionActions.setPromotions(
+          response.flat().map(promotion => {
+            //TODO: Keep the image base path in an env file.
+            //Set provider logos for the promotions.
+            promotion.providerLogo = `https://www.mweb.co.za/media/images/providers/provider-${ promotion.provider.toLowerCase() }.png`;
+
+            return promotion;
+          })
+        )
+      );
     }
   });
 
