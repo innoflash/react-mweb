@@ -34,16 +34,16 @@ export default function DealsFilter() {
   }
 
   return (
-    <div className="w-full flex flex-row">
-      <div className="w-1/3">
+    <div className="w-full flex flex-col md:flex-row">
+      <div className="w-full md:w-1/3">
         <label className="font-light">Filter By:</label>
         <div className="flex gap-2">
           <select value={ undefined }
-                  className="px-4 py-2 border-2 bg-transparent">
+                  className="px-4 py-2 border-2 bg-transparent flex-grow md:flex-grow-0">
             <option value={ undefined }>Speed</option>
           </select>
           <select value={ filteredPriceRange }
-                  className="px-4 py-2 border-2 bg-transparent"
+                  className="px-4 py-2 border-2 bg-transparent flex-grow md:flex-grow-0"
                   onChange={ priceRangeChangeHandler }>
             <option value="-1"> Price</option>
             { priceOptions.map((priceOption, index) => <option key={ priceOption.label }
@@ -51,7 +51,7 @@ export default function DealsFilter() {
           </select>
         </div>
       </div>
-      <div className="w-1/3 flex flex-col">
+      <div className="w-full mt-4 md:mt-0 md:w-1/3 flex flex-col">
         <label className="font-light">Deal Type:</label>
         <select value={ selectedCampaign?.code }
                 className="bg-blue-900 text-white py-2 text-center"
