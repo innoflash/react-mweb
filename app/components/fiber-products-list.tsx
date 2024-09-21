@@ -6,7 +6,7 @@ import { FiberProductsResponse } from '@mweb/app/models/fiber-products.response'
 import { useEffect } from 'react';
 
 export default function FiberProductsList() {
-  const { launchRequest, isLoading } = useHttp<FiberProductsResponse>({
+  const { launchRequest: getFibreProductsRequest, isLoading: isFetchingFibreProducts } = useHttp<FiberProductsResponse>({
     onRequestSuccess: (response: FiberProductsResponse) => {
       console.log(response);
     }
@@ -18,7 +18,7 @@ export default function FiberProductsList() {
       visibility: 'public'
     });
 
-    return launchRequest(`/campaigns/fibre?${ queryParams.toString() }`);
+    return getFibreProductsRequest(`/campaigns/fibre?${ queryParams.toString() }`);
   }, []);
 
   return (
@@ -26,7 +26,7 @@ export default function FiberProductsList() {
       <h1 className="font-bold text-center text-3xl">Fiber Products</h1>
       <p className="text-center my-2">Select a Fibre infrastructure provider below, browse the products available and
         complete a coverage search</p>
-      { isLoading && <Loader/> }
+      { isFetchingFibreProducts && <Loader/> }
     </>
   );
 }
