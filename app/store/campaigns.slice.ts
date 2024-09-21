@@ -12,12 +12,13 @@ const campaignsSlice = createSlice({
   reducers: {
     setCampaigns: (state, action: { payload: Array<Campaign> }) => {
       state.campaigns = action.payload;
+    },
+    setSelectedCampaign: (state, action: { payload: Campaign }) => {
+      state.selectedCampaign = action.payload;
     }
   }
 });
 
 export const campaignActions = campaignsSlice.actions;
 export default campaignsSlice;
-
-campaignActions.setCampaigns([]);
 

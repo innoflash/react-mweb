@@ -4,9 +4,12 @@ import Loader from '@mweb/app/components/loader';
 import useHttp from '@mweb/app/hooks/useHttp';
 import { FiberCampaignsResponse } from '@mweb/app/models/fiber-campaigns.response';
 import { FibrePromotionModel } from '@mweb/app/models/fibre-product.model';
+import { campaignActions } from '@mweb/app/store/campaigns.slice';
 import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
 export default function FiberProductsList() {
+  const dispatch = useDispatch();
   const {
     launchRequest: getFibrePromotionsRequest,
     isLoading: isFetchingFibreProducts
@@ -22,7 +25,8 @@ export default function FiberProductsList() {
     isLoading: isFetchingFibreCampaigns
   } = useHttp<FiberCampaignsResponse>({
     onRequestSuccess: (response: FiberCampaignsResponse) => {
-      //TODO: Save campaigns in state manager.
+      //Save campaigns in state manager.
+      dispatch(campaignActions.setCampaigns(response.campaigns));
       //TODO: Save default selected campaign code.
 
       const productsUrls = response.campaigns.map(campaign => {
