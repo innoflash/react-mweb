@@ -6,12 +6,22 @@ import { FiberCampaignsResponse } from '@mweb/app/models/fiber-campaigns.respons
 import { useEffect } from 'react';
 
 export default function FiberProductsList() {
-  //const { data: fibreProducts, isLoading: isFetchingFibreProducts } = useHttp<FiberCampaignsResponse>();
-  const { launchRequest: getFibreCampaignsRequest, isLoading: isFetchingFibreCampaigns } = useHttp<FiberCampaignsResponse>({
+  const { launchRequest: getFibreProductsRequest, isLoading: isFetchingFibreProducts } = useHttp();
+  const {
+    launchRequest: getFibreCampaignsRequest,
+    isLoading: isFetchingFibreCampaigns
+  } = useHttp<FiberCampaignsResponse>({
     onRequestSuccess: (response: FiberCampaignsResponse) => {
       //TODO: Save campaigns in state manager.
       //TODO: Save default selected campaign code.
-      console.log(response);
+
+      const productsUrls = response.campaigns.map(campaign => {
+        const queryParams = new URLSearchParams({ sellable_online: 'true' });
+
+        return `/products/promos/${ campaign.promocodes.join(',') }?${ queryParams.toString() }`;
+      });
+
+      return getFibreProductsRequest(productsUrls);
     }
   });
 
