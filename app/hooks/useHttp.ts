@@ -20,16 +20,15 @@ function useHttp<T>(config?: {
   const launchRequest = (url: string | string[], requestInit: RequestInit = {
     method: 'get'
   }) => {
+    //start the loading.
+    setIsLoading(true);
+
     //emit request start.
     if (config?.onRequestStart) {
       config.onRequestStart();
     }
 
-    //start the loading.
-    setIsLoading(true);
-
     const urlIsArray = Array.isArray(url);
-
     if (!urlIsArray) {
       // @ts-expect-error This is the desired behavior.
       url = [url];
