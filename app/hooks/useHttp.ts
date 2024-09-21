@@ -43,16 +43,18 @@ function useHttp<T>(config?: {
     Promise.all(requests)
       .then(res => res.map(r => r.json()))
       .then(async res => {
+        let serverData = await Promise.all(res);
+
         if (!urlIsArray) {
-          setData(await res[0]);
+          serverData = serverData[0];
+          setData(serverData[0]);
         } else {
-          const overall = await Promise.all(res);
-          setData(overall as unknown as T);
+          setData(serverData as unknown as T);
         }
 
         // emit request success.
         if (config?.onRequestSuccess) {
-          config.onRequestSuccess(data as T);
+          config.onRequestSuccess(serverData as T);
         }
       })
       .catch(error => {
