@@ -2,6 +2,7 @@
 
 import Loader from '@mweb/app/components/loader';
 import useHttp from '@mweb/app/hooks/useHttp';
+import { useSelectedPromotions } from '@mweb/app/hooks/useSelectedPromotions';
 import { FiberCampaignsResponse } from '@mweb/app/models/fiber-campaigns.response';
 import { FibrePromotionModel } from '@mweb/app/models/fibre-product.model';
 import { campaignActions } from '@mweb/app/store/campaigns.slice';
@@ -11,6 +12,7 @@ import { useDispatch } from 'react-redux';
 
 export default function FiberProductsList(props: { onLoadingCompleted: VoidFunction }) {
   const dispatch = useDispatch();
+  const promotions = useSelectedPromotions();
   const {
     launchRequest: getFibrePromotionsRequest,
     isLoading: isFetchingFibreProducts
@@ -22,7 +24,7 @@ export default function FiberProductsList(props: { onLoadingCompleted: VoidFunct
           response.flat().map(promotion => {
             //TODO: Keep the image base path in an env file.
             //Set provider logos for the promotions.
-            promotion.providerLogo = `https://www.mweb.co.za/media/images/providers/provider-${ promotion.provider.toLowerCase() }.png`;
+            promotion.providerLogo = `https://www.mweb.co.za/media/images/providers/provider-${ promotion.provider.toLowerCase().replace(' ', '-') }.png`;
 
             return promotion;
           })
@@ -63,6 +65,8 @@ export default function FiberProductsList(props: { onLoadingCompleted: VoidFunct
 
     return getFibreCampaignsRequest(`/campaigns/fibre?${ queryParams.toString() }`);
   }, []);
+
+  console.log({ promotions });
 
   return (
     <>
