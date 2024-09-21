@@ -16,6 +16,9 @@ export const filtersSlice = createSlice({
       }
 
       state.providers.push(action.payload)
+    },
+    updatePriceFilter: (state, action: { payload: { min: number, max: number } | undefined }) => {
+      state.price = action.payload;
     }
   }
 });

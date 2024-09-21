@@ -84,7 +84,7 @@ export default function FiberProductsList(props: { onLoadingCompleted: VoidFunct
                alt={ provider.providerName }
                key={ provider.providerName }
                onClick={() => dispatch(filterActions.toggleProvider(provider.providerName))}
-               className={ `py-4 px-12 bg-gray-300 w-full hover:bg-blue-900 rounded cursor-pointer ${ filteredProviders.includes(provider.providerName) ? 'bg-gray-400' : '' }` }/>
+               className={ `py-4 px-12 w-full hover:bg-gray-200 rounded cursor-pointer ${ filteredProviders.includes(provider.providerName) ? 'bg-gray-300' : '' }` }/>
         )) }
       </div> }
     </>

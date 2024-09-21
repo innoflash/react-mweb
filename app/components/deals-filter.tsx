@@ -1,6 +1,8 @@
 import { Campaign } from '@mweb/app/models/fiber-campaigns.response';
 import { AppState } from '@mweb/app/models/state/app.state.model';
 import { campaignActions, CAMPAIGNS } from '@mweb/app/store/campaigns.slice';
+import { filterActions } from '@mweb/app/store/filters.slice';
+import { ChangeEvent, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 const priceOptions = [
@@ -11,8 +13,18 @@ const priceOptions = [
 
 export default function DealsFilter() {
   const dispatch = useDispatch();
+  const [filteredPriceRange, setFilteredPriceRange] = useState();
   const campaigns = useSelector<AppState, Array<Campaign>>(state => state[CAMPAIGNS].campaigns);
   const selectedCampaign = useSelector<AppState, Campaign | undefined>(state => state[CAMPAIGNS].selectedCampaign);
+
+  const priceRangeChangeHandler = (event: ChangeEvent<{ value?: string }>) => {
+    const selectedPriceIndex = event.target.value;
+    if (!selectedPriceIndex || isNaN(+selectedPriceIndex)) {
+      return dispatch(filterActions.updatePriceFilter(undefined));
+    }
+
+    return dispatch(filterActions.updatePriceFilter(priceOptions[+selectedPriceIndex]));
+  }
 
   return (
     <div className="w-full flex flex-row">
@@ -23,11 +35,12 @@ export default function DealsFilter() {
                   className="px-4 py-2 border-2">
             <option value={ undefined }>Speed</option>
           </select>
-          <select value={ undefined }
-                  className="px-4 py-2 border-2">
-            <option value={ undefined }>Price</option>
+          <select value={ filteredPriceRange }
+                  className="px-4 py-2 border-2"
+                  onChange={ priceRangeChangeHandler }>
+            <option value={ undefined }> Price</option>
             { priceOptions.map((priceOption, index) => <option key={ priceOption.label }
-                                                        value={ index }>{ priceOption.label }</option>) }
+                                                               value={ index }>{ priceOption.label }</option>) }
           </select>
         </div>
       </div>

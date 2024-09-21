@@ -24,7 +24,7 @@ export default function ProductDetail({ product, campaign }: { product: FibrePro
           className="font-light opacity-65">{ product.parameters.find(param => param.name === 'isThrottled')?.value }</span>
         <span className="opacity-65">{ campaign }</span>
         <div className="flex justify-between items-center h-8">
-          <span className="h-full text-xl font-black">R{ product.productRate }pm</span>
+          <span className="h-full text-xl font-extrabold opacity-75">R{ product.productRate }pm</span>
           <img className="h-full" src={ providerLogo } alt={ product.subcategory }/>
         </div>
       </div>
@@ -46,7 +46,7 @@ export default function ProductDetail({ product, campaign }: { product: FibrePro
             </span>
           </div>
         </div>
-        <button className="w-full bg-red-600 text-white font-bold py-1 px-4 rounded mt-3">
+        <button className="w-full bg-red-600 text-white font-bold py-1 px-4 rounded mt-3 text-sm">
           Check Coverage
         </button>
       </div>
