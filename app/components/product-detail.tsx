@@ -17,7 +17,7 @@ export default function ProductDetail({ product, campaign }: { product: FibrePro
     .replace(' ', '-') }.png`;
 
   return (
-    <div className="w-full border-2 px-4 py-3 cursor-pointer hover:bg-gray-300 flex gap-6 rounded">
+    <div className="w-full border-2 px-4 py-3 cursor-pointer hover:bg-gray-300 dark:hover:bg-blue-900 flex gap-6 rounded">
       <div className="flex flex-col flex-grow">
         <span className="font-black tracking-wide">{ product.friendlyName }</span>
         <span
@@ -25,7 +25,7 @@ export default function ProductDetail({ product, campaign }: { product: FibrePro
         <span className="opacity-65">{ campaign }</span>
         <div className="flex justify-between items-center h-8">
           <span className="h-full text-xl font-extrabold opacity-75">R{ product.productRate }pm</span>
-          <img className="h-full" src={ providerLogo } alt={ product.subcategory }/>
+          <img className="h-full dark:bg-gray-100" src={ providerLogo } alt={ product.subcategory }/>
         </div>
       </div>
 

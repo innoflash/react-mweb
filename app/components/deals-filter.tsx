@@ -13,13 +13,14 @@ const priceOptions = [
 
 export default function DealsFilter() {
   const dispatch = useDispatch();
-  const [filteredPriceRange, setFilteredPriceRange] = useState();
+  const [filteredPriceRange, setFilteredPriceRange] = useState('-1');
   const campaigns = useSelector<AppState, Array<Campaign>>(state => state[CAMPAIGNS].campaigns);
   const selectedCampaign = useSelector<AppState, Campaign | undefined>(state => state[CAMPAIGNS].selectedCampaign);
 
-  const priceRangeChangeHandler = (event: ChangeEvent<{ value?: string }>) => {
+  const priceRangeChangeHandler = (event: ChangeEvent<{ value: string }>) => {
+    console.log(event.target.value);
     const selectedPriceIndex = event.target.value;
-    if (!selectedPriceIndex || isNaN(+selectedPriceIndex)) {
+    if (selectedPriceIndex === '-1') {
       return dispatch(filterActions.updatePriceFilter(undefined));
     }
 
@@ -27,7 +28,7 @@ export default function DealsFilter() {
   }
 
   const dealTypeChangeHandler = (event: ChangeEvent<{ value: string }>) => {
-    setFilteredPriceRange(undefined);
+    setFilteredPriceRange('-1');
     dispatch(filterActions.resetFilter());
     dispatch(campaignActions.setSelectedCampaign(event.target.value));
   }
@@ -44,7 +45,7 @@ export default function DealsFilter() {
           <select value={ filteredPriceRange }
                   className="px-4 py-2 border-2 bg-transparent"
                   onChange={ priceRangeChangeHandler }>
-            <option value={ undefined }> Price</option>
+            <option value="-1"> Price</option>
             { priceOptions.map((priceOption, index) => <option key={ priceOption.label }
                                                                value={ index }>{ priceOption.label }</option>) }
           </select>
