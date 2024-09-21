@@ -9,9 +9,7 @@ import { promotionActions } from '@mweb/app/store/promotions.slice';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
-export default function FiberProductsList(props: {
-  onLoadingCompleted: (completed: boolean) => void;
-}) {
+export default function FiberProductsList(props: { onLoadingCompleted: VoidFunction }) {
   const dispatch = useDispatch();
   const {
     launchRequest: getFibrePromotionsRequest,
@@ -31,7 +29,7 @@ export default function FiberProductsList(props: {
         )
       );
     },
-    onRequestComplete: () => props.onLoadingCompleted(true)
+    onRequestComplete: () => props.onLoadingCompleted()
   });
 
   const {
