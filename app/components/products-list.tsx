@@ -10,7 +10,7 @@ export default function ProductsList() {
   const selectedCampaign = useSelector<AppState, Campaign | undefined>(state => state[CAMPAIGNS].selectedCampaign);
 
   return (
-    <div className="my-6 w-full grid grid-cols-2 gap-4">
+    <div className="my-6 w-full grid grid-cols-1 md:grid-cols-2 gap-4">
       { products.map((product, i) => <ProductDetail key={ product.id + i }
                                                product={ product }
                                                campaign={ selectedCampaign?.name }/>) }
