@@ -5,8 +5,8 @@ import { FILTERS } from '@mweb/app/store/filters.slice';
 import { useSelector } from 'react-redux';
 
 export function useSelectedProducts() {
-  const selectedPromotions = useSelectedPromotions();
   const filters = useSelector<AppState, FilterStateModel>(state => state[FILTERS]);
+  const selectedPromotions = useSelectedPromotions();
 
   return selectedPromotions.filter(promotion => {
     //filter promotions by selected providers.
