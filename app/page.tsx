@@ -9,7 +9,7 @@ import { useState } from 'react';
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
   return (
-    <div className="mx-16">
+    <div className="md:mx-16 mx-2">
       <FiberProductsList onLoadingCompleted={ () => setIsLoading(false) }/>
       { isLoading && <Loader/> }
       { !isLoading && <div className="my-3">
