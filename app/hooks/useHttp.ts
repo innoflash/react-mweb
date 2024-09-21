@@ -1,8 +1,5 @@
 import { useState } from 'react';
 
-//TODO: Set the url into an environment variable.
-const baseAPIUrl = 'https://apigw.mweb.co.za/prod/baas/proxy/marketing';
-
 export interface HttpUseHookResult<T> {
   isLoading: boolean;
   launchRequest: (url: string | string[], requestInit?: RequestInit) => void;
@@ -35,7 +32,7 @@ function useHttp<T>(config?: {
 
     //config multiple requests.
     const requests = (url as Array<string>).map(uri => {
-      return fetch(`${ baseAPIUrl }${ uri }`, requestInit);
+      return fetch(`${ process.env.NEXT_PUBLIC_MWED_API_URL }${ uri }`, requestInit);
     })
 
     Promise.all(requests)
