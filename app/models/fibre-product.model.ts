@@ -26,6 +26,7 @@ export interface FibreProductModel {
   productDiscountAmount: number;
   productDiscountPeriod: number;
   productDiscountSequence: number;
+  providerLogo: string;
   onceOffCharge: boolean;
   summary: string;
   isHero: boolean;

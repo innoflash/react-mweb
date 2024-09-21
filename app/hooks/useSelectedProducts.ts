@@ -7,9 +7,8 @@ import { useSelector } from 'react-redux';
 export function useSelectedProducts() {
   const selectedPromotions = useSelectedPromotions();
   const filteredProviderNames = useSelector<AppState, Array<string>>(state => state[FILTERS].providers);
-
-  const filterByProviderNames = (promotion: FibrePromotionModel): boolean => {
-    if (!filterByProviderNames.length) {
+  const filterByProviderNamesFn = (promotion: FibrePromotionModel): boolean => {
+    if (!filteredProviderNames.length) {
       return true;
     }
 
@@ -17,7 +16,10 @@ export function useSelectedProducts() {
   }
 
   return selectedPromotions.filter(promotion => {
-    return filterByProviderNames(promotion);
-  });
+    return filterByProviderNamesFn(promotion);
+  })
+    .map(promotion => promotion.products.map(product => {
+      return { ...product, providerLogo: product.providerLogo };
+    }));
 }
 
