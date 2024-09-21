@@ -11,7 +11,7 @@ export default function ProductsList() {
 
   return (
     <div className="my-6 w-full grid grid-cols-2 gap-4">
-      { products.map(product => <ProductDetail key={ product.id }
+      { products.map((product, i) => <ProductDetail key={ product.id + i }
                                                product={ product }
                                                campaign={ selectedCampaign?.name }/>) }
     </div>
