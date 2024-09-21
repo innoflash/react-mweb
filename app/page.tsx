@@ -3,6 +3,7 @@
 import DealsFilter from '@mweb/app/components/deals-filter';
 import FiberProductsList from '@mweb/app/components/fiber-products-list';
 import Loader from '@mweb/app/components/loader';
+import ProductsList from '@mweb/app/components/products-list';
 import { useState } from 'react';
 
 export default function Home() {
@@ -13,6 +14,7 @@ export default function Home() {
       { isLoading && <Loader/> }
       { !isLoading && <div className="my-3">
           <DealsFilter/>
+          <ProductsList/>
       </div> }
     </div>
   );
