@@ -17,9 +17,7 @@ export function useSelectedProducts() {
 
   return selectedPromotions.filter(promotion => {
     return filterByProviderNamesFn(promotion);
-  })
-    .map(promotion => promotion.products.map(product => {
-      return { ...product, providerLogo: product.providerLogo };
-    }));
+  }).map(promotion => promotion.products)
+    .flat();
 }
 
