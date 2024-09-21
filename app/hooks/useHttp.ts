@@ -1,10 +1,6 @@
 import { useState } from 'react';
-const baseAPIUrl = 'https://apigw.mweb.co.za/prod/baas/proxy/marketing';
 
-export type HttpUseModel<T> = {
-  onError?: (error: unknown) => void,
-  onSuccess?: (data: T) => void
-}
+const baseAPIUrl = 'https://apigw.mweb.co.za/prod/baas/proxy/marketing';
 
 export interface HttpUseHookResult<T> {
   isLoading: boolean;
@@ -12,9 +8,9 @@ export interface HttpUseHookResult<T> {
   data?: T;
 }
 
-function useHttp<T>(config?: HttpUseModel<T> & {
+function useHttp<T>(config?: {
   onRequestStart?: () => void,
-  onRequestSuccess?: (data: unknown) => void,
+  onRequestSuccess?: (data: T) => void,
   onRequestFailure?: (error: unknown) => void,
   onRequestComplete?: () => void
 }): HttpUseHookResult<T> {
@@ -22,7 +18,7 @@ function useHttp<T>(config?: HttpUseModel<T> & {
   const [data, setData] = useState<T>();
 
   const launchRequest = (url: string | string[], requestInit: RequestInit = {
-    method: 'get',
+    method: 'get'
   }) => {
     //emit request start.
     if (config?.onRequestStart) {
@@ -34,26 +30,42 @@ function useHttp<T>(config?: HttpUseModel<T> & {
 
     const urlIsArray = Array.isArray(url);
 
-    console.log(setData)
     if (!urlIsArray) {
       // @ts-expect-error This is the desired behavior.
       url = [url];
     }
 
-    //config axios multi
+    //config multiple requests.
     const requests = (url as Array<string>).map(uri => {
-      return fetch(`${baseAPIUrl}${uri}`, requestInit);
+      return fetch(`${ baseAPIUrl }${ uri }`, requestInit);
     })
 
     Promise.all(requests)
       .then(res => res.map(r => r.json()))
-      .then(res => {
-        console.log(res);
-/*        if (!urlIsArray) {
-          setData(res[0]);
+      .then(async res => {
+        if (!urlIsArray) {
+          setData(await res[0]);
         } else {
-          setData(res.map(item => item.data) as unknown as T);
-        }*/
+          const overall = await Promise.all(res);
+          setData(overall as unknown as T);
+        }
+
+        // emit request success.
+        if (config?.onRequestSuccess) {
+          config.onRequestSuccess(data as T);
+        }
+      })
+      .catch(error => {
+        if (config?.onRequestFailure) {
+          config.onRequestFailure(error);
+        }
+      })
+      .finally(() => {
+        setIsLoading(false);
+
+        if (config?.onRequestComplete) {
+          config.onRequestComplete();
+        }
       });
   }
 
