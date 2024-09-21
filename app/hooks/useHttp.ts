@@ -17,9 +17,7 @@ function useHttp<T>(config?: {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [data, setData] = useState<T>();
 
-  const launchRequest = (url: string | string[], requestInit: RequestInit = {
-    method: 'get'
-  }) => {
+  const launchRequest = (url: string | string[], requestInit: RequestInit = { method: 'get' }) => {
     //start the loading.
     setIsLoading(true);
 
