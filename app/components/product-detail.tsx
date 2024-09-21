@@ -10,7 +10,7 @@ const bytesToMB = (speed?: string): string => {
 }
 
 export default function ProductDetail({ product, campaign }: { product: FibreProductModel, campaign?: string }) {
-  const providerLogo = `https://www.mweb.co.za/media/images/providers/provider-${ product.subcategory.replace('Uncapped', '')
+  const providerLogo = `${process.env.NEXT_PUBLIC_MWED_LOGOS_URL}/provider-${ product.subcategory.replace('Uncapped', '')
     .replace('Capped', '')
     .trim()
     .toLowerCase()
