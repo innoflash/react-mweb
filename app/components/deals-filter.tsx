@@ -4,9 +4,9 @@ import { campaignActions, CAMPAIGNS } from '@mweb/app/store/campaigns.slice';
 import { useDispatch, useSelector } from 'react-redux';
 
 const priceOptions = [
-  'R0 - R699',
-  'R700 - R999',
-  'R1000+'
+  { min: 0, max: 699, label: 'R0 - R699' },
+  { min: 700, max: 999, label: 'R700 - R999' },
+  { min: 1000, max: 9999, label: 'R1000+' }
 ];
 
 export default function DealsFilter() {
@@ -26,8 +26,8 @@ export default function DealsFilter() {
           <select value={ undefined }
                   className="px-4 py-2 border-2">
             <option value={ undefined }>Price</option>
-            { priceOptions.map((priceOption) => <option key={ priceOption }
-                                                        value={ priceOption }>{ priceOption }</option>) }
+            { priceOptions.map((priceOption, index) => <option key={ priceOption.label }
+                                                        value={ index }>{ priceOption.label }</option>) }
           </select>
         </div>
       </div>
