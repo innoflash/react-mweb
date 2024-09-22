@@ -78,13 +78,13 @@ export default function FiberProductsList(props: { onLoadingCompleted: VoidFunct
         Select a Fibre infrastructure provider below, browse the products available and complete a coverage search
       </p>
       { (isFetchingFibreCampaigns || isFetchingFibreProducts) && <Loader/> }
-      { (!isFetchingFibreCampaigns || !isFetchingFibreProducts) && <div className="grid md:grid-cols-3 lg:grid-cols-5 grid-cols-2 gap-4 mb-12 mt-8 max-h-96 overflow-y-scroll md:max-h-full md:overflow-y-auto">
+      { (!isFetchingFibreCampaigns || !isFetchingFibreProducts) && <div className="grid md:grid-cols-4 lg:grid-cols-6 grid-cols-3 gap-4 mb-12 mt-8 max-h-96 overflow-y-scroll md:max-h-full md:overflow-y-auto">
         { selectedProviders.map(provider => (
           <img src={ provider.providerLogo }
                alt={ provider.providerName }
                key={ provider.providerName }
                onClick={() => dispatch(filterActions.toggleProvider(provider.providerName))}
-               className={ `py-4 px-12 w-full hover:bg-gray-200 rounded cursor-pointer dark:bg-gray-100 dark:hover:bg-gray-400 ${ filteredProviders.includes(provider.providerName) ? 'bg-gray-300 dark:bg-red-500' : '' }` }/>
+               className={ `py-3 px-6 w-full hover:bg-gray-200 rounded cursor-pointer dark:bg-gray-100 dark:hover:bg-gray-400 ${ filteredProviders.includes(provider.providerName) ? 'bg-gray-300 dark:bg-red-500' : '' }` }/>
         )) }
       </div> }
     </>
