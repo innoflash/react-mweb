@@ -29,7 +29,7 @@ export default function FiberProductsList(props: { onLoadingCompleted: VoidFunct
           response.flat().map(promotion => {
             //TODO: Keep the image base path in an env file.
             //Set provider logos for the promotions.
-            promotion.providerLogo = `${process.env.NEXT_PUBLIC_MWED_LOGOS_URL}/provider-${ promotion.provider.toLowerCase().replace(' ', '-') }.png`;
+            promotion.providerLogo = `${process.env.NEXT_PUBLIC_MWEB_LOGOS_URL}/provider-${ promotion.provider.toLowerCase().replace(' ', '-') }.png`;
 
             return promotion;
           })

@@ -32,7 +32,7 @@ function useHttp<T>(config?: {
 
     //config multiple requests.
     const requests = (url as Array<string>).map(uri => {
-      return fetch(`${ process.env.NEXT_PUBLIC_MWED_API_URL }${ uri }`, requestInit);
+      return fetch(`${ process.env.NEXT_PUBLIC_MWEB_API_URL }${ uri }`, requestInit);
     })
 
     Promise.all(requests)
