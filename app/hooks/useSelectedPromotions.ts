@@ -5,7 +5,10 @@ import { CAMPAIGNS } from '@mweb/app/store/campaigns.slice';
 import { PROMOTIONS } from '@mweb/app/store/promotions.slice';
 import { useSelector } from 'react-redux';
 
-export function useSelectedPromotions() {
+/**
+ * Filtered promotions based on the current selected campaign.
+ */
+export function useSelectedPromotions(): Array<FibrePromotionModel> {
   const selectedCampaign = useSelector<AppState, Campaign | undefined>(state => state[CAMPAIGNS].selectedCampaign);
   const allPromotions = useSelector<AppState, Array<FibrePromotionModel>>(state => state[PROMOTIONS]);
 

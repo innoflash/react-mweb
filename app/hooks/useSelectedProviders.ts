@@ -1,5 +1,8 @@
 import { useSelectedPromotions } from '@mweb/app/hooks/useSelectedPromotions';
 
+/**
+ * Filters selected providers based off of the selected promotions.
+ */
 export function useSelectedProviders() {
   const promotions = useSelectedPromotions();
 
