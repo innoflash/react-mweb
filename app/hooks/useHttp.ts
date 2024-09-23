@@ -42,10 +42,8 @@ function useHttp<T>(config?: {
 
         if (!urlIsArray) {
           serverData = serverData[0];
-          setData(serverData[0]);
-        } else {
-          setData(serverData as unknown as T);
         }
+        setData(serverData as T);
 
         // emit request success.
         if (config?.onRequestSuccess) {
